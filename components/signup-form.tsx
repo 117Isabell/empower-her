@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+import { auth } from "@/firebase";
 
 const signUpSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),

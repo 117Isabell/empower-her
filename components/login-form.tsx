@@ -18,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FcGoogle } from "react-icons/fc";
+import { auth } from "@/firebase";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -99,17 +100,15 @@ export function LoginForm() {
             {...register("password")}
           />
           {errors.password && (
-            <p className="text-sm text-destructive">{errors.password.message}</p>
+            <p className="text-sm text-destructive">
+              {errors.password.message}
+            </p>
           )}
         </div>
-        
+
         <Dialog>
           <DialogTrigger asChild>
-            <Button
-              type="button"
-              variant="link"
-              className="px-0 font-normal"
-            >
+            <Button type="button" variant="link" className="px-0 font-normal">
               Forgot password?
             </Button>
           </DialogTrigger>
@@ -117,7 +116,8 @@ export function LoginForm() {
             <DialogHeader>
               <DialogTitle>Reset Password</DialogTitle>
               <DialogDescription>
-                Enter your email address and we'll send you a link to reset your password.
+                Enter your email address and we'll send you a link to reset your
+                password.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmitReset(onReset)} className="space-y-4">
@@ -130,14 +130,12 @@ export function LoginForm() {
                   {...registerReset("email")}
                 />
                 {resetErrors.email && (
-                  <p className="text-sm text-destructive">{resetErrors.email.message}</p>
+                  <p className="text-sm text-destructive">
+                    {resetErrors.email.message}
+                  </p>
                 )}
               </div>
-              <Button 
-                type="submit" 
-                className="w-full"
-                disabled={isResetting}
-              >
+              <Button type="submit" className="w-full" disabled={isResetting}>
                 {isResetting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -155,8 +153,8 @@ export function LoginForm() {
         </Dialog>
 
         <div className="space-y-4">
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full h-12 text-lg font-semibold"
             disabled={isLoading}
           >
